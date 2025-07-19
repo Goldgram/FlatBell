@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
     mutate(loginForm, {
       onSuccess: (responseId) => {
         // Note: Lets pretend the userId is something like a secure access token that came back in the login response
-        Cookies.set(USER_COOKIE_KEY, responseId, { expires: 1 });
+        Cookies.set(USER_COOKIE_KEY, `${responseId}`, { expires: 1 });
         navigate("/");
       },
       onError: () => {
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
     navigate("/login", { replace: true });
   };
 
-  const userId = Cookies.get(USER_COOKIE_KEY);
+  const userId = parseInt(Cookies.get(USER_COOKIE_KEY) || "");
   const value: AuthContextType = useMemo(() => {
     return {
       isLoggedIn: !!userId,

@@ -4,7 +4,7 @@ import type { LoginForm } from "../../types/login";
 export interface AuthContextType {
   isLoggedIn: boolean;
   isLoggingIn: boolean;
-  userId: string | undefined;
+  userId: number | undefined;
   login: (loginForm: LoginForm) => void;
   logout: () => void;
 }

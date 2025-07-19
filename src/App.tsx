@@ -5,6 +5,7 @@ import { ErrorPage } from "./pages/ErrorPage";
 import { HierarchyTreePage } from "./pages/HierarchyTreePage";
 import { LoginPage } from "./pages/LoginPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { UsersProvider } from "./context/users/UsersProvider";
 
 export const App = () => {
   return (
@@ -13,7 +14,14 @@ export const App = () => {
         <AuthProvider>
           <Routes>
             <Route path="/" element={<AuthenticatedRoutes />}>
-              <Route index element={<HierarchyTreePage />} />
+              <Route
+                index
+                element={
+                  <UsersProvider>
+                    <HierarchyTreePage />
+                  </UsersProvider>
+                }
+              />
             </Route>
             <Route path="/login" element={<UnauthenticatedRoutes />}>
               <Route index element={<LoginPage />} />
