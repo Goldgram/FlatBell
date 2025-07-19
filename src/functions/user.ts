@@ -1,11 +1,20 @@
 import type { User, UserWithChildren } from "../types/user";
 
 export const getFullUserName = (user: User | undefined) => {
-  if (!user) {
+  if (!user || (!user.firstName && !user.lastName)) {
     return "Unknown";
   }
   const { firstName = "Mx", lastName = "" } = user;
   return `${firstName} ${lastName}`.trim();
+};
+
+export const getUserInitials = (user: User | undefined) => {
+  if (!user || (!user.firstName && !user.lastName)) {
+    return "?";
+  }
+  const firstInitial = user?.firstName?.[0] || "";
+  const secondInitial = user?.lastName?.[0] || "";
+  return `${firstInitial}${secondInitial}`.toLocaleUpperCase();
 };
 
 export const createUserTree = (users: User[]): UserWithChildren[] => {

@@ -3,9 +3,9 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  managerId: number;
-  password: string;
-  photo: string;
+  password?: string;
+  managerId?: number;
+  photo?: string;
 }
 
 export interface UserWithChildren extends User {

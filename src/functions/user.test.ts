@@ -7,7 +7,7 @@ import {
   mockUsers,
   mockUserTree,
 } from "../mocks/user";
-import { createUserTree, getFullUserName } from "./user";
+import { createUserTree, getFullUserName, getUserInitials } from "./user";
 
 describe("user functions", () => {
   describe("getFullUserName", () => {
@@ -23,6 +23,30 @@ describe("user functions", () => {
 
     it("should return users last name only with honorific", () => {
       expect(getFullUserName({ lastName: "Smith" } as any)).toEqual("Mx Smith");
+    });
+
+    it("should return unknown for falsy cases", () => {
+      expect(getFullUserName({} as any)).toEqual("Unknown");
+    });
+  });
+
+  describe("getUserInitials", () => {
+    it("should return users full name", () => {
+      expect(getUserInitials(mockUser1)).toEqual("RG");
+      expect(getUserInitials(mockUser2)).toEqual("DN");
+      expect(getUserInitials(mockUser3)).toEqual("RY");
+    });
+
+    it("should return users first name only", () => {
+      expect(getUserInitials({ firstName: "John" } as any)).toEqual("J");
+    });
+
+    it("should return users last name only with honorific", () => {
+      expect(getUserInitials({ lastName: "Smith" } as any)).toEqual("S");
+    });
+
+    it("should return question mark for falsy cases", () => {
+      expect(getUserInitials({} as any)).toEqual("?");
     });
   });
 

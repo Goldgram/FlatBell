@@ -3,6 +3,7 @@ import { HierarchyTreeItem } from "../components/HierarchyTreeItem";
 import { PageHeader, PageLayout } from "../components/PageLayout";
 import { useAuthContext } from "../context/auth/AuthContext";
 import { useUsersContext } from "../context/users/UsersContext";
+import { getFullUserName } from "../functions/user";
 
 export const HierarchyTreePage = () => {
   const { logout, userId } = useAuthContext();
@@ -12,11 +13,8 @@ export const HierarchyTreePage = () => {
     return <p>Loading...</p>;
   }
 
-  console.log("user", userId, users);
-  const fullUserName = "TO DO";
-  // error if can't find logged in user
-
-  if (isError) {
+  const loggedInUser = users.find((user) => user.id === userId);
+  if (isError || !loggedInUser) {
     return <Navigate to="/error" />;
   }
 
@@ -24,7 +22,7 @@ export const HierarchyTreePage = () => {
     <PageLayout>
       <PageHeader title="Hierarchy Tree">
         <p>
-          {fullUserName} (
+          {getFullUserName(loggedInUser)} (
           <button
             className="inline cursor-pointer underline"
             style={{ color: "#0900f8" }}
