@@ -13,12 +13,14 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
 
   if (!user.photo || imageError) {
     return (
-      <p
-        className="border-2 rounded-full h-10 w-10 flex items-center justify-center"
+      <div
+        className="h-10 w-10 border-2 rounded-full"
         style={{ borderColor: "#7822B5" }}
       >
-        {initials}
-      </p>
+        <div className="h-9 w-9 flex items-center justify-center">
+          {initials}
+        </div>
+      </div>
     );
   }
 

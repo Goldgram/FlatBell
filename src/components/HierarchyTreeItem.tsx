@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 import type { UserWithChildren } from "../types/user";
 import { getFullUserName } from "../functions/user";
 import { UserAvatar } from "./UserAvatar";
@@ -10,18 +9,20 @@ interface HierarchyTreeItemProps {
 
 export const HierarchyTreeItem = ({ user }: HierarchyTreeItemProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const { id, children, email } = user;
+  const { id, children } = user;
 
   const toggleExpanded = () => {
     setIsExpanded((current) => !current);
   };
 
-  const fullUserName = getFullUserName(user);
   const hasChildren = children?.length > 0;
 
   const buttonId = `accordion-button-${id}`;
   const contentId = `accordion-content-${id}`;
 
+  if (!hasChildren) {
+    return <UserRow user={user} />;
+  }
   return (
     <>
       <button
@@ -30,29 +31,41 @@ export const HierarchyTreeItem = ({ user }: HierarchyTreeItemProps) => {
         aria-controls={contentId}
         aria-expanded={isExpanded}
         onClick={toggleExpanded}
-        className={cx("flex items-center gap-4 py-2", {
-          "cursor-pointer": hasChildren,
-        })}
+        className="cursor-pointer"
       >
-        <p className="text-3xl font-bold pb-1">{hasChildren ? "+" : "-"}</p>
-        <UserAvatar user={user} />
-        <p>
-          {fullUserName} {email}
-        </p>
+        <UserRow user={user} />
       </button>
-      {hasChildren && (
-        <div
-          role="region"
-          id={contentId}
-          aria-labelledby={buttonId}
-          className="pl-12"
-          hidden={!isExpanded}
-        >
-          {children.map((child) => {
-            return <HierarchyTreeItem user={child} />;
-          })}
-        </div>
-      )}
+      <div
+        role="region"
+        id={contentId}
+        aria-labelledby={buttonId}
+        className="pl-12"
+        hidden={!isExpanded}
+      >
+        {children.map((child) => {
+          return <HierarchyTreeItem user={child} />;
+        })}
+      </div>
     </>
+  );
+};
+
+interface UserRowProps {
+  user: UserWithChildren;
+}
+
+const UserRow = ({ user }: UserRowProps) => {
+  const { children, email } = user;
+  const fullUserName = getFullUserName(user);
+  const hasChildren = children?.length > 0;
+
+  return (
+    <div className="flex items-center gap-4 py-2 px-1">
+      <p className="text-3xl font-bold pb-1">{hasChildren ? "+" : "-"}</p>
+      <UserAvatar user={user} />
+      <p className="text-left">
+        {fullUserName} {email}
+      </p>
+    </div>
   );
 };
