@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import App from "./App";
+import { App } from "./App";
 
 describe("App", () => {
   it("renders the App component", () => {
     render(<App />);
-    expect(screen.getByText("Vite + React")).toBeTruthy();
+    expect(screen.getByText("Hello gong")).toBeTruthy();
   });
 });
