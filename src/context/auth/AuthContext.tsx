@@ -1,17 +1,18 @@
 import { createContext, useContext } from "react";
-import type { User } from "../../types/user";
 import type { LoginForm } from "../../types/login";
 
 export interface AuthContextType {
   isLoggedIn: boolean;
-  user: User | undefined;
+  isLoggingIn: boolean;
+  userId: string | undefined;
   login: (loginForm: LoginForm) => void;
   logout: () => void;
 }
 
 export const DEFAULT_AUTH_CONTEXT = {
   isLoggedIn: false,
-  user: undefined,
+  isLoggingIn: false,
+  userId: undefined,
   login: () => {},
   logout: () => {},
 };

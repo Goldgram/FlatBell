@@ -5,7 +5,7 @@ import { isValidLoginForm } from "../functions/login";
 import type { LoginForm } from "../types/login";
 
 export const LoginPage = () => {
-  const { login } = useAuthContext();
+  const { login, isLoggingIn } = useAuthContext();
 
   const [form, setForm] = useState<LoginForm>({
     email: "",
@@ -43,6 +43,7 @@ export const LoginPage = () => {
           required={true}
           value={form.email}
           onChange={(e) => updateForm({ email: e.target.value })}
+          disabled={isLoggingIn}
         />
         <input
           id="user-password"
@@ -51,8 +52,11 @@ export const LoginPage = () => {
           required={true}
           value={form.password}
           onChange={(e) => updateForm({ password: e.target.value })}
+          disabled={isLoggingIn}
         />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoggingIn}>
+          {isLoggingIn ? "Logging in..." : "Login"}
+        </button>
       </form>
     </PageLayout>
   );

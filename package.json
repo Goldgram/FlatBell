@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.83.0",
     "classnames": "^2.5.1",
     "js-cookie": "^3.0.5",
     "react": "^19.1.0",
