@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PageHeader, PageLayout } from "../components/PageLayout";
 import { useAuthContext } from "../context/auth/AuthContext";
 import { isValidLoginForm } from "../functions/login";
 import type { LoginForm } from "../types/login";
@@ -24,13 +25,15 @@ export const LoginPage = () => {
     e.preventDefault();
     if (isValidLoginForm(form)) {
       login(form);
+    } else {
+      // Note: Add log/notifications as needed
+      alert("You have entered an invalid username or password");
     }
-    //TODO handle error
   };
 
   return (
-    <div>
-      <p>Please login</p>
+    <PageLayout>
+      <PageHeader title="Please login" />
       <form onSubmit={onSubmit}>
         <input
           id="user-email"
@@ -51,6 +54,6 @@ export const LoginPage = () => {
         />
         <button type="submit">Login</button>
       </form>
-    </div>
+    </PageLayout>
   );
 };
