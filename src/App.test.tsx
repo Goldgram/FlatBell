@@ -23,7 +23,7 @@ describe("App", () => {
     });
 
     it("should show the hierarchy tree page when already authenticated", () => {
-      Cookies.set(USER_COOKIE_KEY, "test-token-123");
+      Cookies.set(USER_COOKIE_KEY, "123");
       render(<App />);
 
       const title = screen.queryByText("Hierarchy Tree");
