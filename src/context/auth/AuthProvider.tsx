@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
         navigate("/");
       },
       onError: () => {
-        navigate("/error");
+        alert("There was an error logging in, please try again.");
       },
     });
   };
