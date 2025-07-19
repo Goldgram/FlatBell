@@ -2,13 +2,15 @@ import { createContext, useContext } from "react";
 import type { User, UserWithChildren } from "../../types/user";
 
 export interface UsersContextType {
-  isLoadingUsers: boolean;
+  isLoading: boolean;
+  isError: boolean;
   users: User[];
   userTree: UserWithChildren[];
 }
 
 export const DEFAULT_USERS_CONTEXT = {
-  isLoadingUsers: false,
+  isLoading: true,
+  isError: false,
   users: [],
   userTree: [],
 };
