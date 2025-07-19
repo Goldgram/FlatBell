@@ -1,6 +1,8 @@
 import React from "react";
+import cx from "classnames";
 import type { UserWithChildren } from "../types/user";
 import { getFullUserName } from "../functions/user";
+import { UserAvatar } from "./UserAvatar";
 
 interface HierarchyTreeItemProps {
   user: UserWithChildren;
@@ -8,7 +10,7 @@ interface HierarchyTreeItemProps {
 
 export const HierarchyTreeItem = ({ user }: HierarchyTreeItemProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const { id, children } = user;
+  const { id, children, email } = user;
 
   const toggleExpanded = () => {
     setIsExpanded((current) => !current);
@@ -21,24 +23,29 @@ export const HierarchyTreeItem = ({ user }: HierarchyTreeItemProps) => {
   const contentId = `accordion-content-${id}`;
 
   return (
-    <div>
+    <>
       <button
         type="button"
         id={buttonId}
         aria-controls={contentId}
         aria-expanded={isExpanded}
         onClick={toggleExpanded}
-        className="flex"
+        className={cx("flex items-center gap-4 py-2", {
+          "cursor-pointer": hasChildren,
+        })}
       >
-        <div>{hasChildren ? "+" : "-"}</div>
-        <p>{fullUserName}</p>
+        <p className="text-3xl font-bold pb-1">{hasChildren ? "+" : "-"}</p>
+        <UserAvatar user={user} />
+        <p>
+          {fullUserName} {email}
+        </p>
       </button>
       {hasChildren && (
         <div
           role="region"
           id={contentId}
           aria-labelledby={buttonId}
-          className="pl-4"
+          className="pl-12"
           hidden={!isExpanded}
         >
           {children.map((child) => {
@@ -46,6 +53,6 @@ export const HierarchyTreeItem = ({ user }: HierarchyTreeItemProps) => {
           })}
         </div>
       )}
-    </div>
+    </>
   );
 };

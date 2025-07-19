@@ -33,13 +33,14 @@ export const HierarchyTreePage = () => {
           )
         </p>
       </PageHeader>
-
-      {userTree.length ? (
-        userTree?.map((user) => {
-          return <HierarchyTreeItem key={user.id} user={user} />;
-        })
-      ) : (
+      {!userTree.length ? (
         <p>No user data created.</p>
+      ) : (
+        <div className="mx-16">
+          {userTree?.map((user) => {
+            return <HierarchyTreeItem key={user.id} user={user} />;
+          })}
+        </div>
       )}
     </PageLayout>
   );
