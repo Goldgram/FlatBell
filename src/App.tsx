@@ -13,7 +13,9 @@ export const App = () => {
           <Route path="/" element={<AuthenticatedRoutes />}>
             <Route index element={<HierarchyTreePage />} />
           </Route>
-          <Route path="/login" index element={<LoginPage />} />
+          <Route path="/login" element={<UnauthenticatedRoutes />}>
+            <Route index element={<LoginPage />} />
+          </Route>
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<Navigate to="/error" replace />} />
         </Routes>
@@ -26,6 +28,14 @@ const AuthenticatedRoutes = () => {
   const { isLoggedIn } = useAuthContext();
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
+  }
+  return <Outlet />;
+};
+
+const UnauthenticatedRoutes = () => {
+  const { isLoggedIn } = useAuthContext();
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
   }
   return <Outlet />;
 };
