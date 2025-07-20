@@ -43,7 +43,7 @@ export const HierarchyTreeItem = ({ user }: HierarchyTreeItemProps) => {
         hidden={!isExpanded}
       >
         {children.map((child) => {
-          return <HierarchyTreeItem user={child} />;
+          return <HierarchyTreeItem key={child.id} user={child} />;
         })}
       </div>
     </>

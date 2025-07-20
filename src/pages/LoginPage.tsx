@@ -52,11 +52,12 @@ export const LoginPage = () => {
         </div>
 
         <div className="flex gap-4 pt-3">
-          <label htmlFor="user-password" className="text-right  w-32">
+          <label htmlFor="user-password" className="text-right w-32">
             password:
           </label>
           <input
             id="user-password"
+            data-testid="user-password"
             name="user-password"
             type="password"
             required={true}
