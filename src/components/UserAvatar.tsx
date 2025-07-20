@@ -29,7 +29,7 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
       src={user.photo}
       alt={`${fullname} avatar`}
       onError={() => setImageError(true)}
-      className="border-2 rounded-full h-10 w-10"
+      className="border-2 rounded-full h-10 w-10 object-cover"
       style={{ borderColor: "#7822B5" }}
     />
   );

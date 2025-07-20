@@ -33,9 +33,9 @@ export const LoginPage = () => {
   return (
     <PageLayout>
       <PageHeader title="Please login" />
-      <form onSubmit={onSubmit} className="border mx-32 p-4">
-        <div className="flex gap-4">
-          <label htmlFor="user-email" className="text-right w-32">
+      <form onSubmit={onSubmit} className="border md:mx-32 p-4">
+        <div className="flex flex-col sm:flex-row sm:gap-4">
+          <label htmlFor="user-email" className="sm:text-right w-32">
             email address:
           </label>
           <input
@@ -51,8 +51,8 @@ export const LoginPage = () => {
           />
         </div>
 
-        <div className="flex gap-4 pt-3">
-          <label htmlFor="user-password" className="text-right w-32">
+        <div className="flex flex-col sm:flex-row sm:gap-4 pt-3">
+          <label htmlFor="user-password" className="sm:text-right w-32">
             password:
           </label>
           <input

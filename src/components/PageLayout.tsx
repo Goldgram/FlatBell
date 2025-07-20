@@ -1,7 +1,9 @@
 import cx from "classnames";
 
 export const PageLayout = ({ children }: React.PropsWithChildren) => {
-  return <div className="max-w-3xl mx-auto px-4 pt-4 pb-10">{children}</div>;
+  return (
+    <div className="max-w-3xl min-w-xs mx-auto px-4 pt-4 pb-10">{children}</div>
+  );
 };
 
 interface PageHeader extends React.PropsWithChildren {

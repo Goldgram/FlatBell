@@ -39,7 +39,7 @@ export const HierarchyTreeItem = ({ user }: HierarchyTreeItemProps) => {
         role="region"
         id={contentId}
         aria-labelledby={buttonId}
-        className="pl-12"
+        className="pl-10 sm:pl-12"
         hidden={!isExpanded}
       >
         {children.map((child) => {
@@ -60,8 +60,10 @@ const UserRow = ({ user }: UserRowProps) => {
   const hasChildren = children?.length > 0;
 
   return (
-    <div className="flex items-center gap-4 py-2 px-1">
-      <p className="text-3xl font-bold pb-1">{hasChildren ? "+" : "-"}</p>
+    <div className="flex items-center gap-2 sm:gap-4 py-2 px-1">
+      <div>
+        <p className="text-3xl font-bold pb-1 w-5">{hasChildren ? "+" : "-"}</p>
+      </div>
       <UserAvatar user={user} />
       <p className="text-left">
         {fullUserName} {email}

@@ -36,7 +36,7 @@ export const HierarchyTreePage = () => {
       {!userTree.length ? (
         <p>No user data created.</p>
       ) : (
-        <div className="mx-16">
+        <div className="sm:mx-8 md:mx-16">
           {userTree?.map((user) => {
             return <HierarchyTreeItem key={user.id} user={user} />;
           })}
